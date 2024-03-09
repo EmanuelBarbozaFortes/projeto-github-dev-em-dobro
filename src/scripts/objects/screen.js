@@ -6,6 +6,8 @@ const screen = {
                            <div class="data">
                             <h1>${user.name ?? 'Não possui nome cadastrado'}</h1>
                             <p>${user.bio ?? 'Não possui nome cadastrado'}</p>
+                            <p>👥Seguidores ${user.followers}</p>
+                            <p>👥Seguindo ${user.following}</p>
                             </div>
                         </div>`;
     let repositoriesItens = ''
