@@ -36,6 +36,7 @@ async function getUserData(userName) {
     return;
   }
   const repositoriesResponse = await getRespositories(userName);
+
   const eventsResponse = await getEvents(userName);
 
   user.setInfo(userResponse);
@@ -45,5 +46,6 @@ async function getUserData(userName) {
   user.setEvents(eventsResponse);
 
   screen.renderUser(user);
+  
   screen.renderEvents(user);
 }
