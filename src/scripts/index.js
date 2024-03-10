@@ -1,13 +1,13 @@
-import { getUser } from './services/users.js';
-import { getRespositories } from './services/repositories.js';
-import { getEvents } from './services/events.js';
+import { getUser } from "./services/users.js";
+import { getRespositories } from "./services/repositories.js";
+import { getEvents } from "./services/events.js";
 
-import { user } from './objects/users.js'
-import { screen } from './objects/screen.js';
+import { user } from "./objects/users.js";
+import { screen } from "./objects/screen.js";
 
 document.getElementById("btn-search").addEventListener("click", () => {
   const userName = document.getElementById("input-search").value;
-  if(validateEmptyInput(userName)) return
+  if (validateEmptyInput(userName)) return;
   getUserData(userName);
 });
 
@@ -16,30 +16,34 @@ document.getElementById("input-search").addEventListener("keyup", (e) => {
   const key = e.which || e.keyCode;
   const isEnterKeyPressed = key === 13;
   if (isEnterKeyPressed) {
-    if(validateEmptyInput(userName)) return
+    if (validateEmptyInput(userName)) return;
     getUserData(userName);
   }
 });
 
-function validateEmptyInput(userName){
-  if(userName.length === 0 ){
-    alert('Preencha o campo com o nome do usuario do GitHub')
-    return true
+function validateEmptyInput(userName) {
+  if (userName.length === 0) {
+    alert("Preencha o campo com o nome do usuario do GitHub");
+    return true;
   }
 }
 
 async function getUserData(userName) {
+  const userResponse = await getUser(userName);
 
-    const userResponse = await getUser(userName)
+  if (userResponse.message === "Not Found") {
+    screen.renderNotFound();
+    return;
+  }
+  const repositoriesResponse = await getRespositories(userName);
+  const eventsResponse = await getEvents(userName);
 
-    if(userResponse.message === "Not Found"){
-      screen.renderNotFound()
-      return
-    }
-    const repositoriesResponse = await getRespositories(userName)
-    const eventsResponse = await getEvents(userName)
-    user.setInfo(userResponse)
-    user.setRepositories(repositoriesResponse)
-    user.setEvents(eventsResponse)
-    screen.renderUser(user)
- }
+  user.setInfo(userResponse);
+
+  user.setRepositories(repositoriesResponse);
+
+  user.setEvents(eventsResponse);
+
+  screen.renderUser(user);
+  screen.renderEvents(user);
+}

@@ -144,12 +144,56 @@ main {
 }
 
 .container .profile-data .repositories ul li a:hover {
-  background-color: rgb(22, 19, 203);
+  background-color: rgb(159, 56, 15);
   color: #fff;
 }
 
 .container .profile-data.hide {
   display: none;
+}
+.container .events {
+  text-align: start;
+  width: 650px;
+  max-width: 650px;
+  background-color: #f3efef;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.container .events h2 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.container .events ul {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.container .events ul li {
+  margin-bottom: 15px;
+}
+
+.container .events ul li h3 {
+  text-align: center;
+}
+
+.container .events ul li .name {
+  font-weight: 700;
+}
+.container .info-repo {
+  display: flex;
+  justify-content: center;
+  margin-top: 7px;
+  gap: 3px;
+  color: white;
+}
+
+.container .info-repo .info {
+  background-color: rgba(76, 0, 255, 0.696);
+  padding: 3px;
+  border-radius: 5px;
 }
 
 @media (max-width: 1280px) {
